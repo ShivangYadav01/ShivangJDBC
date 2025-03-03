@@ -30,6 +30,8 @@ public static void main(String[] args)throws SQLException {
 	
 	EmployeeDao edao=new EmployeeDaoImpl();
 	
-edao.deleteEmployeeById(14);
+//edao.deleteEmployeeById(14);
+//	edao.getAllEmployees();
+	edao.getEmployeeById(4);
 }
 }

@@ -1,6 +1,7 @@
 package com.sql.learning.dao;
 
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import com.sql.learning.entity.Employee;
@@ -11,6 +12,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	static final String Insert_Query="INSERT INTO EMPLOYEE(ID,NAME,GENDER,SALARY)VALUES (%d,'%s','%s',%d)";
 	static final String Update_Query="Update employee set name = '%s',gender='%s',salary =%d where id =%d";
 	static final String Delete_Query="Delete from employee where id=%d";
+	static final String Select_Query="Select* from employee";
+	static final String Select_By_Id_Query="Select* from employee where id=%d";
 	static {
 		try {
 			stmt=DriverManager.getConnection("jdbc:mysql://localhost:3306/shivang","root","root").createStatement()	;	
@@ -44,14 +47,22 @@ stmt.executeUpdate(String.format(Delete_Query, id));
 	}
 
 	@Override
-	public void getAllEmployees() {
-	
+	public void getAllEmployees() throws SQLException {
+	ResultSet rs=stmt.executeQuery(Select_Query);
+	while(rs.next()) {
+		System.out.println("ID ="+rs.getInt(1)+"  Name = "+rs.getString(2)+"  Gender = "+rs.getString(3)+"  Salary = "+rs.getInt(4));
+		System.out.println(stmt.executeQuery(Select_Query));
+	}
 		
 	}
 
 	@Override
-	public void getEmployeeById(int id) {
-		
+	public void getEmployeeById(int id) throws SQLException {
+		ResultSet rs=stmt.executeQuery(String.format(Select_By_Id_Query, id));
+		while(rs.next()) {
+			System.out.println("ID ="+rs.getInt(1)+"  Name = "+rs.getString(2)+"  Gender = "+rs.getString(3)+"  Salary = "+rs.getInt(4));
+			System.out.println(String.format(Select_By_Id_Query, id));
+		}
 		
 	}
 
