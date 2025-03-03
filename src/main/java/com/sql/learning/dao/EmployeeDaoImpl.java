@@ -1,0 +1,57 @@
+package com.sql.learning.dao;
+
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import com.sql.learning.entity.Employee;
+
+public class EmployeeDaoImpl implements EmployeeDao {
+	static Statement stmt =null;
+	//static final String SQL="INSERT INTO EMPLOYEE(ID,NAME,GENDER,SALARY)VALUES (5,'Sameer','Male',78000)";
+	static final String Insert_Query="INSERT INTO EMPLOYEE(ID,NAME,GENDER,SALARY)VALUES (%d,'%s','%s',%d)";
+	static final String Update_Query="Update employee set name = '%s',gender='%s',salary =%d where id =%d";
+	static {
+		try {
+			stmt=DriverManager.getConnection("jdbc:mysql://localhost:3306/shivang","root","root").createStatement()	;	
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		}
+
+	@Override
+	public void saveEmployee(Employee e) throws SQLException {
+		//stmt.executeUpdate("INSERT INTO EMPLOYEE(ID,NAME,GENDER,SALARY)VALUES ("+e.getId()+",'"+e.getName()+"','"+e.getGender()+"',"+e.getSalary()+")");
+		stmt.executeUpdate(String.format(Insert_Query,e.getId(),e.getName(),e.getGender(),e.getSalary()));
+		//System.out.println("INSERT INTO EMPLOYEE(ID,NAME,GENDER,SALARY)VALUES");
+		System.out.println(String.format(Insert_Query,e.getId(),e.getName(),e.getGender(),e.getSalary()));
+		System.out.println(".EmployeeDao.saveEmployee()");
+		
+	}
+
+	@Override
+	public void updateEmployee(Employee e) throws SQLException {
+//stmt.executeUpdate("update employee set name ='"+e.getName()+"',gender ='"+e.getGender()+"',salary="+e.getSalary()+"where id= "+e.getId()+"");
+		stmt.executeUpdate(String.format(Update_Query,e.getName(),e.getGender(),e.getSalary(),e.getId()));
+		//System.out.println("\"Update employee set name ='\"+e.getName()+\"',gender ='\"+e.getGender()+\"',salary=\"+e.getSalary()+\"where id= \"+e.getId()+\"");
+		System.out.println(String.format(Update_Query,e.getName(),e.getGender(),e.getSalary(),e.getId()));
+	}
+
+	@Override
+	public void deleteeEmployeeById(int id) {
+
+		
+	}
+
+	@Override
+	public void getAllEmployees() {
+	
+		
+	}
+
+	@Override
+	public void getEmployeeById(int id) {
+		
+		
+	}
+
+}
