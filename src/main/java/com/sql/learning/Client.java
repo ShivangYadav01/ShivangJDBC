@@ -30,15 +30,6 @@ public static void main(String[] args)throws SQLException {
 	
 	EmployeeDao edao=new EmployeeDaoImpl();
 	
-//	edao.saveEmployee(shiv);
-//	edao.saveEmployee(vinay);
-//	edao.saveEmployee(dhurv);
-//	edao.saveEmployee(vipin);
-
-	edao.updateEmployee(sukoon);
-	
-	//edao.saveEmployee(sukoon);
-System.out.println("Transaction Successfull....");
-
+edao.deleteEmployeeById(14);
 }
 }

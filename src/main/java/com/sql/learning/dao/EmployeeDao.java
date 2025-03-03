@@ -9,7 +9,7 @@ public interface EmployeeDao {
 	
 	public void updateEmployee(Employee e) throws SQLException;
 	
-	public void deleteeEmployeeById(int id)  throws SQLException;
+	public void deleteEmployeeById(int id)  throws SQLException;
 	
 	public void getAllEmployees()  throws SQLException;
 	

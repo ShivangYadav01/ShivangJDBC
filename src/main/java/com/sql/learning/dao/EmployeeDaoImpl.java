@@ -10,6 +10,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	//static final String SQL="INSERT INTO EMPLOYEE(ID,NAME,GENDER,SALARY)VALUES (5,'Sameer','Male',78000)";
 	static final String Insert_Query="INSERT INTO EMPLOYEE(ID,NAME,GENDER,SALARY)VALUES (%d,'%s','%s',%d)";
 	static final String Update_Query="Update employee set name = '%s',gender='%s',salary =%d where id =%d";
+	static final String Delete_Query="Delete from employee where id=%d";
 	static {
 		try {
 			stmt=DriverManager.getConnection("jdbc:mysql://localhost:3306/shivang","root","root").createStatement()	;	
@@ -37,9 +38,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public void deleteeEmployeeById(int id) {
-
-		
+	public void deleteEmployeeById(int id)throws SQLException {
+stmt.executeUpdate(String.format(Delete_Query, id));
+		System.out.println(String.format(Delete_Query, id));
 	}
 
 	@Override
